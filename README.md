@@ -6,7 +6,7 @@
 
 ```bash
 # 克隆到 Claude Code skills 目录
-git clone https://github.com/YanRuiZhan/news-skill.git ~/.claude/skills/news
+git clone https://github.com/YanRuiZhan/Claude-code-news-skill.git ~/.claude/skills/news
 ```
 
 或者手动将 `SKILL.md` 复制到 `~/.claude/skills/news/` 目录下。
@@ -20,6 +20,10 @@ git clone https://github.com/YanRuiZhan/news-skill.git ~/.claude/skills/news
 ```
 
 技能会自动从多个新闻源并发抓取最新热点，整理分类输出。
+
+## 推荐配置
+
+建议安装 [Tavily MCP](https://github.com/anthropics/claude-code/tree/main/mcp-servers/tavily) 以获取更稳定、更全面的新闻搜索能力。Tavily 专为 AI Agent 优化搜索，在墙内环境下比直接 WebSearch 更可靠。
 
 ## 新闻源
 
