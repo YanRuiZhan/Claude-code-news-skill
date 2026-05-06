@@ -1,6 +1,6 @@
 # /news — Claude Code 新闻资讯技能
 
-从 Hacker News、AI Base、The Next Web、HelloGitHub 等多个新闻源搜集素材，整理成 10-20 条中文新闻简讯的 Claude Code 技能。
+从 Hacker News、AI Base、The Next Web、HelloGitHub、HubLens 等多个新闻源搜集素材，整理成 10-20 条中文新闻简讯的 Claude Code 技能。
 
 ## 安装
 
@@ -19,21 +19,33 @@ git clone https://github.com/YanRuiZhan/Claude-code-news-skill.git ~/.claude/ski
 /news
 ```
 
-技能会自动从多个新闻源并发抓取最新热点，整理分类输出。
+技能会自动从多个新闻源并发抓取最新热点，汇总去重后按板块分类输出。
 
 ## 推荐配置
 
-建议安装 [Tavily MCP](https://github.com/anthropics/claude-code/tree/main/mcp-servers/tavily) 以获取更稳定、更全面的新闻搜索能力。Tavily 专为 AI Agent 优化搜索，在墙内环境下比直接 WebSearch 更可靠。
+- 建议配置 **HubLens MCP**，可优先提供 AI、GitHub 与产品动态聚合信号。
+- 建议安装 **Tavily MCP** 作为搜索补充，在 WebSearch 不稳定时可作为备选。
 
 ## 新闻源
 
 | 源 | 说明 | 访问方式 |
 |---|---|---|
-| [AI Base](https://www.aibase.com/zh/daily) | AI 领域每日新闻，中文 | WebFetch 直接抓取 |
+| [AI Base](https://www.aibase.com/zh/daily) | AI 领域每日新闻，中文，墙内可达 | WebFetch 直接抓取 |
+| HubLens | AI / GitHub / 产品动态聚合源 | 优先通过已配置的 HubLens MCP 获取 |
 | [Hacker News](https://news.ycombinator.com) | 全球技术热点 | WebSearch 搜索 |
 | [HelloGitHub](https://hellogithub.com) | 开源项目推荐，中文 | WebFetch 或 WebSearch |
 | [The Next Web](https://thenextweb.com/news) | 国际科技新闻 | WebSearch 搜索 |
 | WebSearch 补充 | 覆盖其他热点 | 关键词搜索 |
+
+## 抓取策略
+
+考虑到网络环境限制，默认采用以下优先级：
+
+1. 已配置的 **HubLens MCP**
+2. 中文站点直抓：**AI Base**、**HelloGitHub**
+3. **WebSearch** 搜索 Hacker News、TNW 等国际站点
+4. 必要时使用 **Tavily** 作为备选
+5. 最后补充中文关键词搜索，如“今日科技热点”“AI 新闻”
 
 ## 输出格式
 
@@ -46,8 +58,16 @@ git clone https://github.com/YanRuiZhan/Claude-code-news-skill.git ~/.claude/ski
 
 | # | 标题 | 要点 |
 |---|------|------|
-| 1 | 主标题 | 一句话简述 |
+| 1 | **主标题** | 一句话简述 |
 ```
+
+常见板块包括：
+
+- AI / 大模型
+- 行业事件
+- 投融资与市场
+- 开源项目
+- 开发者趋势
 
 ## 示例输出
 
@@ -94,4 +114,4 @@ git clone https://github.com/YanRuiZhan/Claude-code-news-skill.git ~/.claude/ski
 ## 环境要求
 
 - Claude Code（任意版本）
-- 网络连接（墙内环境已适配，优先使用 WebSearch + 中文站直接抓取）
+- 网络连接（优先 HubLens，其次中文站直抓，再用 WebSearch / Tavily 补充）

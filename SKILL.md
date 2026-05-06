@@ -1,6 +1,6 @@
 ---
 name: news
-description: 用户输入 /news 时触发。从 Hacker News、AI Base、The Next Web、HelloGitHub 等新闻源搜集素材，整理成10-20条中文新闻简讯。也适用于用户说"看看今天有什么新闻"、"帮我整理最新资讯"等类似请求。
+description: 用户输入 /news 时触发。从 Hacker News、AI Base、The Next Web、HelloGitHub、HubLens 等新闻源搜集素材，整理成10-20条中文新闻简讯。也适用于用户说"看看今天有什么新闻"、"帮我整理最新资讯"等类似请求。
 ---
 
 # /news — 获取最新新闻资讯
@@ -16,6 +16,7 @@ description: 用户输入 /news 时触发。从 Hacker News、AI Base、The Next
 | 源 | 说明 | 建议工具 |
 |---|---|---|
 | AI Base (aibase.com/zh/daily) | AI 领域每日新闻，中文，墙内可达 | WebFetch 直接抓取 |
+| HubLens | AI / GitHub / 产品动态聚合源 | 优先通过已配置的 HubLens MCP 获取 |
 | Hacker News (news.ycombinator.com) | 全球技术热点 | WebSearch 搜索最新 |
 | HelloGitHub (hellogithub.com) | 开源项目推荐，中文 | WebFetch 或 WebSearch |
 | The Next Web (thenextweb.com/news) | 国际科技新闻 | WebSearch 搜索最新 |
@@ -25,6 +26,7 @@ description: 用户输入 /news 时触发。从 Hacker News、AI Base、The Next
 
 考虑到网络环境限制：
 
+- **HubLens** 若已配置成功，优先作为 AI / GitHub / 产品动态聚合信号源使用
 - **AI Base** 和 **HelloGitHub** 是中文站，优先用 WebFetch 直接抓取页面内容
 - **Hacker News** 和 **TNW** 优先使用 WebSearch 搜索关键词如 "Hacker News top stories today"、"latest tech news" 获取
 - 必要时使用 tavily_search / tavily_extract 作为备选
